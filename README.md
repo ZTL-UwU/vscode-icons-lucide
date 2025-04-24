@@ -8,7 +8,7 @@
 
 
 <p align="center">
-<a href="https://marketplace.visualstudio.com/items?itemName=ZTL-UwU.icons-lucide" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/ZTL-UwU.icons-carbon.svg?color=EBDED6&amp;label=Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=ZTL-UwU.icons-lucide" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/ztluwu.lucide-icons.svg?color=EBDED6&amp;label=Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
 </p>
 
 <p align="center">
