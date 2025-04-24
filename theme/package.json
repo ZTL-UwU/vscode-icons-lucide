@@ -1,0 +1,43 @@
+{
+  "publisher": "ztluwu",
+  "name": "lucide-icons",
+  "displayName": "Lucide Product Icons",
+  "version": "0.1.0",
+  "description": "Lucide Product Icons for VS Code",
+  "author": {
+    "name": "Tony Zhang"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZTL-UwU/vscode-lucide-icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZTL-UwU/vscode-lucide-icons/issues"
+  },
+  "keywords": [
+    "icon",
+    "theme",
+    "product",
+    "product-icon-theme"
+  ],
+  "categories": [
+    "Themes"
+  ],
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "*"
+  },
+  "extensionKind": [
+    "ui"
+  ],
+  "contributes": {
+    "productIconThemes": [
+      {
+        "id": "Lucide",
+        "label": "Lucide Icons",
+        "path": "./lucide-icons.json"
+      }
+    ]
+  }
+}
