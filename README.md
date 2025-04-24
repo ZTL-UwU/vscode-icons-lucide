@@ -2,7 +2,7 @@
 <img src="https://github.com/ZTL-UwU/vscode-icons-lucide/blob/main/icon.png?raw=true" height="130" width="130"/>
 </p>
 
-<h1 align="center">Lucide Product Icon</h1>
+<h1 align="center">Lucide Product Icon Theme</h1>
 
 <p align="center"><a href="https://lucide.dev/">Lucide</a> Visual Studio Code <a href="https://code.visualstudio.com/api/extension-guides/product-icon-theme">product icon theme</a></p>
 

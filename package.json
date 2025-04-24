@@ -11,7 +11,7 @@
     "productIconThemes": [
       {
         "id": "lucide-icons",
-        "label": "Lucide Product Icons",
+        "label": "Lucide Product Icon Theme",
         "path": "./theme/lucide-icons.json"
       }
     ]

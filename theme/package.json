@@ -1,9 +1,9 @@
 {
   "publisher": "ztluwu",
   "name": "lucide-icons",
-  "displayName": "Lucide Product Icons",
+  "displayName": "Lucide Product Icon Theme",
   "version": "0.1.0",
-  "description": "Lucide Product Icons for VS Code",
+  "description": "Lucide Product Icon Theme for VS Code",
   "author": {
     "name": "Tony Zhang"
   },

@@ -65,9 +65,9 @@ async function theme() {
     {
       publisher: pkg.publisher,
       name: NAME,
-      displayName: `${DISPLAY_NAME} Product Icons`,
+      displayName: `${DISPLAY_NAME} Product Icon Theme`,
       version: pkg.version,
-      description: `${DISPLAY_NAME} Product Icons for VS Code`,
+      description: `${DISPLAY_NAME} Product Icon Theme for VS Code`,
       author: {
         name: 'Tony Zhang',
       },
