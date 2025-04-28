@@ -1,7 +1,7 @@
 {
   "publisher": "ztluwu",
   "name": "lucide-icons",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "packageManager": "pnpm@10.9.0",
   "engines": {
