@@ -74,10 +74,10 @@ async function theme() {
       license: 'MIT',
       repository: {
         type: 'git',
-        url: 'https://github.com/ZTL-UwU/vscode-lucide-icons.git',
+        url: 'https://github.com/ZTL-UwU/vscode-icons-lucide.git',
       },
       bugs: {
-        url: 'https://github.com/ZTL-UwU/vscode-lucide-icons/issues',
+        url: 'https://github.com/ZTL-UwU/vscode-icons-lucide/issues',
       },
       keywords: ['icon', 'theme', 'product', 'product-icon-theme'],
       categories: ['Themes'],
