@@ -164,6 +164,7 @@ export const set: IconSet = {
     'codicon:file-zip': 'lucide:file-archive',
     'codicon:files': 'lucide:folder',
     'codicon:filter': 'lucide:filter',
+    'codicon:extensions-filter': 'lucide:filter',
     'codicon:preferences-filter': 'lucide:filter',
     'codicon:filter-filled': 'lucide:filter-filled',
     'codicon:find-selection': 'lucide:align-left',
