@@ -6,7 +6,6 @@
 
 <p align="center"><a href="https://lucide.dev/">Lucide</a> Visual Studio Code <a href="https://code.visualstudio.com/api/extension-guides/product-icon-theme">product icon theme</a></p>
 
-
 <p align="center">
 <a href="https://marketplace.visualstudio.com/items?itemName=ztluwu.lucide-icons" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/ztluwu.lucide-icons.svg?color=EBDED6&amp;label=Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
 <a href="https://ko-fi.com/ztl_uwu" target="__blank"><img src="https://img.shields.io/badge/sponsor%20me-EBDED6?logo=kofi&logoColor=5E5E5E"></a>

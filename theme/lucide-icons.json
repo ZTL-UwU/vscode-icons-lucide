@@ -166,6 +166,12 @@
     "comment": {
       "fontCharacter": "\\e11b"
     },
+    "code-review": {
+      "fontCharacter": "\\e571"
+    },
+    "compare-changes": {
+      "fontCharacter": "\\e558"
+    },
     "collapse-all": {
       "fontCharacter": "\\e401"
     },
@@ -503,6 +509,12 @@
       "fontCharacter": "\\e1c2"
     },
     "light-bulb": {
+      "fontCharacter": "\\e1c2"
+    },
+    "lightbulb-sparkle": {
+      "fontCharacter": "\\e417"
+    },
+    "lightbulb-autofix": {
       "fontCharacter": "\\e1c2"
     },
     "link": {
