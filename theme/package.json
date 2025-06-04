@@ -2,11 +2,7 @@
   "publisher": "ztluwu",
   "name": "lucide-icons",
   "displayName": "Lucide Product Icon Theme",
-<<<<<<< HEAD
-  "version": "0.1.4",
-=======
-  "version": "0.2.0",
->>>>>>> acd363d (feat: use full codicon list as reference)
+  "version": "0.2.1",
   "description": "Lucide Product Icon Theme for VS Code",
   "author": {
     "name": "Tony Zhang"

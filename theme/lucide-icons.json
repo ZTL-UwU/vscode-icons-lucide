@@ -196,14 +196,11 @@
     "code": {
       "fontCharacter": "\\e097"
     },
-    "coffee": {
-      "fontCharacter": "\\e09a"
-    },
     "code-review": {
       "fontCharacter": "\\e571"
     },
-    "compare-changes": {
-      "fontCharacter": "\\e558"
+    "coffee": {
+      "fontCharacter": "\\e09a"
     },
     "collapse-all": {
       "fontCharacter": "\\e401"
@@ -228,6 +225,9 @@
     },
     "comment-unresolved": {
       "fontCharacter": "\\e573"
+    },
+    "compare-changes": {
+      "fontCharacter": "\\e558"
     },
     "compass": {
       "fontCharacter": "\\e09f"
@@ -634,11 +634,11 @@
     "lightbulb": {
       "fontCharacter": "\\e1c2"
     },
-    "lightbulb-sparkle": {
-      "fontCharacter": "\\e417"
-    },
     "lightbulb-autofix": {
       "fontCharacter": "\\e1c2"
+    },
+    "lightbulb-sparkle": {
+      "fontCharacter": "\\e417"
     },
     "link": {
       "fontCharacter": "\\e108"
