@@ -1,9 +1,9 @@
 {
   "publisher": "ztluwu",
   "name": "lucide-icons",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "private": true,
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.11.1",
   "engines": {
     "vscode": "*"
   },
@@ -22,17 +22,17 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "lucide-static": "^0.503.0"
+    "lucide-static": "^0.513.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.12.0",
-    "@antfu/ni": "^24.3.0",
+    "@antfu/eslint-config": "^4.13.3",
+    "@antfu/ni": "^25.0.0",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.14.1",
-    "@vscode/vsce": "^3.3.2",
-    "eslint": "^9.25.1",
+    "@types/node": "^22.15.29",
+    "@vscode/vsce": "^3.4.2",
+    "eslint": "^9.28.0",
     "fs-extra": "^11.3.0",
-    "tsx": "^4.19.3",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }
 }
