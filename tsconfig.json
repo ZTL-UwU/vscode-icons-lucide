@@ -1,12 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "jsx": "preserve",
-    "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true,
-    "esModuleInterop": true
-  }
+	"compilerOptions": {
+		"target": "ESNext",
+		"jsx": "preserve",
+		"lib": ["ESNext"],
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"strict": true,
+		"esModuleInterop": true
+	}
 }
