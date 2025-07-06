@@ -1,107 +1,68 @@
-import fs from 'fs-extra';
-import json from 'lucide-static/font/info.json';
-import pkg from '../package.json';
-import { set } from './set';
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import lucideFontJson from 'lucide-static/font/info.json'
+import { set } from './set'
 
-const NAME = 'lucide-icons';
-const DISPLAY_NAME = 'Lucide';
+const NAME = 'lucide-icons'
 
-async function theme() {
-  const icons = Object.entries(set.icons).map(([k, v]) => {
-    v = v || k;
-    k = k.replace('codicon:', '');
-    const [_id, name] = v.split(':');
-    return [k, name];
-  });
+// Transform the icon mappings from the set configuration into a processable format
+const icons = Object.entries(set.icons).map(([codiconId, lucideId]) => {
+	// Use the original codicon ID if no Lucide mapping exists
+	const mappedLucideId = lucideId || codiconId
 
-  const iconDefinitions = {};
-  const unicodeMap = json as {
-    [key: string]: {
-      encodedCode: string;
-      prefix: string;
-      className: string;
-      unicode: string;
-    };
-  };
+	// Remove the 'codicon:' prefix from the identifier
+	const cleanCodiconId = codiconId.replace('codicon:', '')
 
-  for (const [k, name] of icons) {
-    if (unicodeMap[name]) {
-      Object.assign(iconDefinitions, {
-        [k]: {
-          fontCharacter: unicodeMap[name].encodedCode,
-        },
-      });
-    }
-  }
+	// Extract just the icon name from the Lucide identifier (after the ':')
+	const [, lucideIconName] = mappedLucideId.split(':')
 
-  fs.copyFileSync(
-    `node_modules/lucide-static/font/lucide.woff`,
-    `theme/${NAME}.woff`,
-  );
+	// Return tuple of [cleaned codicon ID, Lucide icon name]
+	return [cleanCodiconId, lucideIconName]
+})
 
-  fs.writeJSONSync(
-    `theme/${NAME}.json`,
-    {
-      fonts: [
-        {
-          id: NAME,
-          src: [
-            {
-              path: `./${NAME}.woff`,
-              format: 'woff',
-            },
-          ],
-          weight: 'normal',
-          style: 'normal',
-        },
-      ],
-      iconDefinitions,
-    },
-    { spaces: 2 },
-  );
-
-  fs.writeJSONSync(
-    'theme/package.json',
-    {
-      publisher: pkg.publisher,
-      name: NAME,
-      displayName: `${DISPLAY_NAME} Product Icon Theme`,
-      version: pkg.version,
-      description: `${DISPLAY_NAME} Product Icon Theme for VS Code`,
-      author: {
-        name: 'Tony Zhang',
-      },
-      license: 'MIT',
-      repository: {
-        type: 'git',
-        url: 'https://github.com/ZTL-UwU/vscode-icons-lucide.git',
-      },
-      bugs: {
-        url: 'https://github.com/ZTL-UwU/vscode-icons-lucide/issues',
-      },
-      keywords: ['icon', 'theme', 'product', 'product-icon-theme'],
-      categories: ['Themes'],
-      icon: 'icon.png',
-      engines: {
-        vscode: pkg.engines.vscode,
-      },
-      extensionKind: ['ui'],
-      contributes: {
-        productIconThemes: [
-          {
-            id: DISPLAY_NAME,
-            label: `${DISPLAY_NAME} Icons`,
-            path: `./${NAME}.json`,
-          },
-        ],
-      },
-    },
-    { spaces: 2 },
-  );
-
-  fs.copySync('README.md', 'theme/README.md');
-  fs.copySync('icon.png', 'theme/icon.png');
-  fs.copySync('LICENSE', 'theme/LICENSE');
+const iconDefinitions = {}
+const unicodeMap = lucideFontJson as {
+	[key: string]: {
+		encodedCode: string
+		prefix: string
+		className: string
+		unicode: string
+	}
 }
 
-theme();
+// Create mapping of unicode characters for our icons
+for (const [k, name] of icons) {
+	if (unicodeMap[name]) {
+		Object.assign(iconDefinitions, {
+			[k]: {
+				fontCharacter: unicodeMap[name].encodedCode,
+			},
+		})
+	}
+}
+
+await fs.copyFile(
+	path.join('node_modules', 'lucide-static', 'font', 'lucide.woff'),
+	path.join('dist', 'lucide-icons.woff'),
+)
+
+// Write the JSON configuration
+await fs.writeFile(
+	path.join('dist', `${NAME}.json`),
+	JSON.stringify({
+		fonts: [
+			{
+				id: NAME,
+				src: [
+					{
+						path: `./${NAME}.woff`,
+						format: 'woff',
+					},
+				],
+				weight: 'normal',
+				style: 'normal',
+			},
+		],
+		iconDefinitions,
+	}),
+)
