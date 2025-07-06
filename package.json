@@ -1,38 +1,57 @@
 {
-  "publisher": "ztluwu",
-  "name": "lucide-icons",
-  "version": "0.2.1",
-  "private": true,
-  "packageManager": "pnpm@10.11.1",
-  "engines": {
-    "vscode": "*"
-  },
-  "contributes": {
-    "productIconThemes": [
-      {
-        "id": "lucide-icons",
-        "label": "Lucide Product Icon Theme",
-        "path": "./theme/lucide-icons.json"
-      }
-    ]
-  },
-  "scripts": {
-    "build": "tsx scripts/build.ts",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "dependencies": {
-    "lucide-static": "^0.513.0"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^4.13.3",
-    "@antfu/ni": "^25.0.0",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.15.29",
-    "@vscode/vsce": "^3.4.2",
-    "eslint": "^9.28.0",
-    "fs-extra": "^11.3.0",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
-  }
+	"publisher": "ztluwu",
+	"name": "lucide-icons",
+	"version": "0.2.1",
+	"private": true,
+	"engines": {
+		"vscode": "*"
+	},
+	"displayName": "Lucide Product Icon Theme",
+	"description": "Lucide Product Icon Theme for VS Code",
+	"author": {
+		"name": "Tony Zhang"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ZTL-UwU/vscode-icons-lucide.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ZTL-UwU/vscode-icons-lucide/issues"
+	},
+	"keywords": ["icon", "theme", "product", "product-icon-theme"],
+	"categories": ["Themes"],
+	"icon": "icon.png",
+	"extensionKind": ["ui"],
+	"sponsor": {
+		"url": "https://ko-fi.com/ztl_uwu"
+	},
+	"contributes": {
+		"productIconThemes": [
+			{
+				"id": "lucide-icons",
+				"label": "Lucide Product Icon Theme",
+				"path": "./dist/lucide-icons.json"
+			}
+		]
+	},
+	"files": ["dist/lucide-icons.{json,woff}", "LICENSE", "icon.png"],
+	"scripts": {
+		"build": "bun scripts/build.ts",
+		"lint": "biome lint",
+		"lint:fix": "biome format --write",
+		"vscode:prepublish": "bun run lint:fix && bun run build"
+	},
+	"dependencies": {
+		"@types/fontkit": "^2.0.8",
+		"fontkit": "^2.0.4",
+		"lucide-static": "^0.513.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.15.29",
+		"@vscode/vsce": "^3.4.2",
+		"webfont": "^11.2.26",
+		"webfonts-generator": "^0.4.0"
+	}
 }
