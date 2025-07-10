@@ -1,68 +1,189 @@
-import fs from 'node:fs/promises'
+import { createReadStream, existsSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import path from 'node:path'
-import lucideFontJson from 'lucide-static/font/info.json'
-import { set } from './set'
+import { SVGIcons2SVGFontStream } from 'svgicons2svgfont'
+import svg2ttf from 'svg2ttf'
+import ttf2woff from 'ttf2woff'
+import SVGFixer from 'oslllo-svg-fixer'
 
-const NAME = 'lucide-icons'
+import { set } from './set.ts'
 
-// Transform the icon mappings from the set configuration into a processable format
-const icons = Object.entries(set.icons).map(([codiconId, lucideId]) => {
-	// Use the original codicon ID if no Lucide mapping exists
-	const mappedLucideId = lucideId || codiconId
+const FONT_NAME = 'lucide-icons'
+const OUTPUT_DIR = path.resolve('./dist')
+const TEMP_DIR = path.resolve('./.temp')
+const ICONS_DIR = path.resolve('node_modules', 'lucide-static', 'icons')
 
-	// Remove the 'codicon:' prefix from the identifier
-	const cleanCodiconId = codiconId.replace('codicon:', '')
+//#region Types
+type GlyphName = string // e.g. "debug"
+type LucideIconName = string // e.g. "bug"
 
-	// Extract just the icon name from the Lucide identifier (after the ':')
-	const [, lucideIconName] = mappedLucideId.split(':')
+/**
+ * A tuple representing a mapping between:
+ * - `glyphName`: The cleaned codicon identifier (used as glyph name in the font)
+ * - `lucideIconName`: The Lucide icon name (without extension), used to locate the SVG
+ */
+type IconDefinitionPair = [glyphName: GlyphName, lucideIconName: LucideIconName]
+//#endregion
 
-	// Return tuple of [cleaned codicon ID, Lucide icon name]
-	return [cleanCodiconId, lucideIconName]
-})
+/** Mapping of glyph name to its icon definition for VS Code */
+const iconDefinitions: Record<string, { fontCharacter: string }> = {}
 
-const iconDefinitions = {}
-const unicodeMap = lucideFontJson as {
-	[key: string]: {
-		encodedCode: string
-		prefix: string
-		className: string
-		unicode: string
+/**
+ * Prepare the output and temp directories.
+ */
+function prepareDirectories(): void {
+	if (!existsSync(OUTPUT_DIR)) {
+		mkdirSync(OUTPUT_DIR, { recursive: true })
 	}
+	if (!existsSync(TEMP_DIR)) {
+		mkdirSync(TEMP_DIR, { recursive: true })
+	}
+	process.on('exit', () => {
+		if (existsSync(TEMP_DIR)) {
+			rmSync(TEMP_DIR, { recursive: true })
+		}
+	})
 }
 
-// Create mapping of unicode characters for our icons
-for (const [k, name] of icons) {
-	if (unicodeMap[name]) {
-		Object.assign(iconDefinitions, {
-			[k]: {
-				fontCharacter: unicodeMap[name].encodedCode,
-			},
+/**
+ * Converts the icon set mappings to an internal array of tuples.
+ * Removes 'codicon:' prefix and resolves fallback mapping if needed.
+ */
+function parseIconMappings(): IconDefinitionPair[] {
+	return Object.entries(set.icons).map(([codiconId, lucideId]) => {
+		const cleanCodiconId = codiconId.replace(/^codicon:/, '')
+		const mappedLucideId = lucideId || codiconId
+		const [, lucideIconName] = mappedLucideId.split(':')
+		return [cleanCodiconId, lucideIconName]
+	}) as unknown as IconDefinitionPair[]
+}
+
+/**
+ * Fixes SVG icons using oslllo-svg-fixer and returns only valid fixed icons.
+ */
+async function fixSVGs(icons: IconDefinitionPair[]): Promise<IconDefinitionPair[]> {
+	console.log('Fixing SVGs...')
+
+	const tasks = icons.map(async ([glyphName, lucideIconName]) => {
+		const svgPath = path.resolve(ICONS_DIR, `${lucideIconName}.svg`)
+
+		if (!existsSync(svgPath)) {
+			console.warn(`⚠️  Icon not found: ${lucideIconName}, skipping...`)
+			return null
+		}
+
+		await SVGFixer(svgPath, TEMP_DIR).fix()
+		return [glyphName, lucideIconName]
+	})
+
+	const results = await Promise.all(tasks)
+	const fixedIcons = results.filter((r): r is IconDefinitionPair => r !== null)
+
+	console.log(`✅ Fixed ${fixedIcons.length} icons`)
+	return fixedIcons
+}
+
+/**
+ * Generates the SVG font from fixed SVGs and returns the SVG content as string.
+ */
+async function generateSVGFontFrom(fixedIcons: IconDefinitionPair[]): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const fontStream = new SVGIcons2SVGFontStream({
+			fontName: FONT_NAME,
+			normalize: true,
+			fontHeight: 1000,
 		})
-	}
+
+		const chunks: string[] = []
+		fontStream.on('data', (chunk) => chunks.push(chunk.toString()))
+		fontStream.on('finish', () => {
+			const svgFontContent = chunks.join('')
+			console.log(`✅ Generated ${FONT_NAME}.svg`)
+
+			resolve(svgFontContent)
+		})
+
+		fontStream.on('error', (err) => {
+			console.error('❌ Font generation failed:', err)
+			reject(err)
+		})
+
+		let unicodeCode = 0xe000
+
+		for (const [glyphName, lucideIconName] of fixedIcons) {
+			const svgPath = path.resolve(TEMP_DIR, `${lucideIconName}.svg`)
+			const glyph = createReadStream(svgPath)
+
+			// @ts-expect-error
+			glyph.metadata = {
+				unicode: [String.fromCharCode(unicodeCode)],
+				name: glyphName,
+			}
+
+			fontStream.write(glyph)
+
+			iconDefinitions[glyphName] = {
+				fontCharacter: `\\${unicodeCode.toString(16).toUpperCase()}`,
+			}
+
+			unicodeCode++
+		}
+
+		fontStream.end()
+	})
 }
 
-await fs.copyFile(
-	path.join('node_modules', 'lucide-static', 'font', 'lucide.woff'),
-	path.join('dist', 'lucide-icons.woff'),
-)
+/**
+ * Converts SVG font string to WOFF and writes it to disk.
+ */
+function convertFonts(svgFont: string): void {
+	const ttf = svg2ttf(svgFont, {})
+	console.log(`✅ Generated ${FONT_NAME}.ttf (in memory)`)
 
-// Write the JSON configuration
-await fs.writeFile(
-	path.join('dist', `${NAME}.json`),
-	JSON.stringify({
+	const woff = ttf2woff(ttf.buffer)
+	const woffPath = path.resolve(OUTPUT_DIR, `${FONT_NAME}.woff`)
+	writeFileSync(woffPath, Buffer.from(woff.buffer))
+	console.log(`✅ Generated ${FONT_NAME}.woff`)
+}
+
+/**
+ * Writes VS Code icon configuration JSON based on icon definitions.
+ */
+async function writeVSCodeIconConfig(fixedIcons: IconDefinitionPair[]): Promise<void> {
+	const iconConfig = {
 		fonts: [
 			{
-				id: NAME,
-				src: [
-					{
-						path: `./${NAME}.woff`,
-						format: 'woff',
-					},
-				],
+				id: FONT_NAME,
+				src: [{ path: `./${FONT_NAME}.woff`, format: 'woff' }],
 				weight: 'normal',
 				style: 'normal',
 			},
 		],
 		iconDefinitions,
-	}),
-)
+	}
+
+	const jsonPath = path.resolve(OUTPUT_DIR, `${FONT_NAME}.json`)
+	writeFileSync(jsonPath, JSON.stringify(iconConfig))
+	console.log(`✅ Generated ${FONT_NAME}.json with ${fixedIcons.length} icon definitions`)
+}
+
+async function main(): Promise<void> {
+	console.log('🚀 Starting build...')
+
+	prepareDirectories()
+
+	const iconsDefinitions = parseIconMappings()
+	console.log(`📦 Building font with ${iconsDefinitions.length} icons...`)
+
+	const fixedIconsDefinitions = await fixSVGs(iconsDefinitions)
+
+	const svgFont = await generateSVGFontFrom(fixedIconsDefinitions)
+
+	await Promise.all([writeVSCodeIconConfig(fixedIconsDefinitions), convertFonts(svgFont)])
+
+	console.log('🎉 Build completed successfully!')
+}
+
+main().catch((err) => {
+	console.error('❌ Build failed:', err)
+	process.exit(1)
+})
