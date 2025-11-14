@@ -169,6 +169,9 @@
     "clear-all": {
       "fontCharacter": "\\e240"
     },
+    "search-clear-results": {
+      "fontCharacter": "\\e240"
+    },
     "clippy": {
       "fontCharacter": "\\e225"
     },
@@ -225,6 +228,15 @@
     },
     "comment-unresolved": {
       "fontCharacter": "\\e573"
+    },
+    "chat-sessions-icon": {
+      "fontCharacter": "\\e412"
+    },
+    "chat-sparkle": {
+      "fontCharacter": "\\e5d3"
+    },
+    "send-to-remote-agent": {
+      "fontCharacter": "\\e095"
     },
     "compare-changes": {
       "fontCharacter": "\\e558"
@@ -360,6 +372,9 @@
     },
     "extensions": {
       "fontCharacter": "\\e4ff"
+    },
+    "timeline-filter": {
+      "fontCharacter": "\\e465"
     },
     "eye": {
       "fontCharacter": "\\e0be"
@@ -950,6 +965,9 @@
       "fontCharacter": "\\e11e"
     },
     "search": {
+      "fontCharacter": "\\e155"
+    },
+    "search-view-icon": {
       "fontCharacter": "\\e155"
     },
     "search-fuzzy": {
