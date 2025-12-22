@@ -41,6 +41,7 @@
 		"build": "bun scripts/build.ts",
 		"lint": "biome lint",
 		"lint:fix": "biome format --write",
+		"preversion": "bun run lint:fix",
 		"vscode:prepublish": "bun run lint:fix && bun run build"
 	},
 	"devDependencies": {
