@@ -1,8 +1,8 @@
 {
-	"cSpell.words": ["Codicon", "tabler"],
+  "cSpell.words": ["Codicon", "tabler"],
 
-	// Auto fix
-	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit"
-	}
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
 }
