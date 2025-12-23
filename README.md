@@ -7,7 +7,7 @@
 
   [Lucide](https://lucide.dev/) Visual Studio Code [product icon theme](https://code.visualstudio.com/api/extension-guides/product-icon-theme)
 
-  [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/ztluwu.lucide-icons.svg?color=EBDED6&label=Marketplace&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=ztluwu.lucide-icons) [![Sponsor me](https://img.shields.io/badge/sponsor%20me-EBDED6?logo=kofi&logoColor=5E5E5E)](https://ko-fi.com/ztl_uwu)
+  [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/ztluwu.lucide-icons.svg?color=EBDED6&label=Marketplace&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=ztluwu.lucide-icons) [![Open VSX Version](https://img.shields.io/open-vsx/v/ztluwu/lucide-icons?color=EBDED6&label=Open%20VSX&logo=open-vsx)](https://open-vsx.org/extension/ztluwu/lucide-icons) [![Sponsor me](https://img.shields.io/badge/sponsor%20me-EBDED6?logo=kofi&logoColor=5E5E5E)](https://ko-fi.com/ztl_uwu)
 
   ![Preview](https://github.com/ZTL-UwU/vscode-icons-lucide/blob/main/preview.png?raw=true)
 
