@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.2
+
+[compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.1...v0.3.2)
+
+### 🚀 Enhancements
+
+- Add support for v1.109 ([e19b44f](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/e19b44f))
+
+### 🏡 Chore
+
+- **readme:** Add open vsx version ([d6eb9df](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/d6eb9df))
+
+### ❤️ Contributors
+
+- ZTL-UwU
+
 ## v0.3.1
 
 [compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.2.2...v0.3.1)
