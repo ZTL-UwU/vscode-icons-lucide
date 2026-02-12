@@ -564,6 +564,8 @@ export const set: IconSet = {
     'codicon:symbol-unit': 'lucide:ruler',
     'codicon:symbol-value': 'lucide:square-chart-gantt',
     'codicon:symbol-variable': 'lucide:variable',
+    'codicon:open-in-product': 'lucide:square-arrow-out-up-left',
+    'codicon:session-in-progress': 'lucide:loader',
     'codicon:sync': 'lucide:refresh-ccw',
     'codicon:sync-ignored': 'lucide:refresh-cw-off',
     'codicon:table': 'lucide:table',
