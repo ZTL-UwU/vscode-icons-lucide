@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.3
+
+[compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.2...v0.3.3)
+
+### 🚀 Enhancements
+
+- Add copilot open in product and session in progress icons ([7a7a53b](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/7a7a53b))
+
+### ❤️ Contributors
+
+- ZTL-UwU
+
 ## v0.3.2
 
 [compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.1...v0.3.2)
