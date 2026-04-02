@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.4
+
+[compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.3...v0.3.4)
+
+### 🚀 Enhancements
+
+- Add chat window expand & collapse icon for plane on the left ([42522a0](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/42522a0))
+
+### 🏡 Chore
+
+- Add lint ci ([33b6cfa](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/33b6cfa))
+
+### ❤️ Contributors
+
+- ZTL-UwU
+
 ## v0.3.3
 
 [compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.2...v0.3.3)
