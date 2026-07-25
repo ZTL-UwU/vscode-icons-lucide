@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.8
+
+[compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.7...v0.3.8)
+
+### 🚀 Enhancements
+
+- Update icons ([9c65441](https://github.com/ZTL-UwU/vscode-icons-lucide/commit/9c65441))
+
+### ❤️ Contributors
+
+- ZTL-UwU
+
 ## v0.3.7
 
 [compare changes](https://github.com/ZTL-UwU/vscode-icons-lucide/compare/v0.3.6...v0.3.7)
